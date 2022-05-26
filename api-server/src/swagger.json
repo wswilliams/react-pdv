@@ -1,0 +1,1204 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "INTEGRAÇÃO PMZ LINX",
+        "description": "Projeto para realizar integração em api PMZ e Linx utilizando tecnologia NodeJS.",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "servers": [],
+    "paths": {
+        "/api/millenium-pmz/logs": {
+            "get": {
+                "tags": ["Logs"],
+                "summary": "List the logs PMZ >>> LINX.",
+                "operationId": "getLogsById",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/logs"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "itemsPerPage",
+                    "in": "query",
+                    "description": "Quantidade de item",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "page",
+                    "in": "query",
+                    "description": "pagina",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "log_pmz_linx",
+                    "in": "query",
+                    "description": "Log pmz >> linx",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "type_object",
+                    "in": "query",
+                    "description": "tipo de log",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "status_code",
+                    "in": "query",
+                    "description": "status do log",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/logs/get-type-objects": {
+            "get": {
+                "tags": ["Logs"],
+                "summary": "List the logs LINX >>> PMZ.",
+                "operationId": "getLogsTypeObject",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/logs"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "itemsPerPage",
+                    "in": "query",
+                    "description": "Quantidade de item",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "page",
+                    "in": "query",
+                    "description": "pagina",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "log_pmz_linx",
+                    "in": "query",
+                    "description": "Log Linx >> pmz",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "type_object",
+                    "in": "query",
+                    "description": "tipo de log",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "status_code",
+                    "in": "query",
+                    "description": "status do log",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/logs/get-report": {
+            "get": {
+                "tags": ["Logs"],
+                "summary": "Gerar PDF da List the logs",
+                "operationId": "getListPDF",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pdf"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "itemsPerPage",
+                    "in": "query",
+                    "description": "Quantidade de item",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "page",
+                    "in": "query",
+                    "description": "pagina",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "type_log",
+                    "in": "query",
+                    "description": "Tipo de Log",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "type_object",
+                    "in": "query",
+                    "description": "tipo de log",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "status_code",
+                    "in": "query",
+                    "description": "status do log",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "synchronize",
+                    "in": "query",
+                    "description": "synchronize",
+                    "required": true,
+                    "schema": {
+                        "type": "boolean"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "startDate",
+                    "in": "query",
+                    "description": "Data inicial",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "endDate",
+                    "in": "query",
+                    "description": "Date final",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/logs/get-delete-all-file": {
+            "get": {
+                "tags": ["Logs"],
+                "summary": "Delete all file",
+                "operationId": "deleteLogs",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/message"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/api/millenium-pmz/logs/send-logs": {
+            "get": {
+                "tags": ["Logs"],
+                "summary": "Reenvia a List the logs",
+                "operationId": "sendListLog",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pdf"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "itemsPerPage",
+                    "in": "query",
+                    "description": "Quantidade de item",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "page",
+                    "in": "query",
+                    "description": "pagina",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "type_log",
+                    "in": "query",
+                    "description": "Tipo de Log",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "type_object",
+                    "in": "query",
+                    "description": "tipo de log",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "status_code",
+                    "in": "query",
+                    "description": "status do log",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "synchronize",
+                    "in": "query",
+                    "description": "synchronize",
+                    "required": true,
+                    "schema": {
+                        "type": "boolean"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "startDate",
+                    "in": "query",
+                    "description": "Data inicial",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "endDate",
+                    "in": "query",
+                    "description": "Date final",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/logs/delete-many-log-pmz": {
+            "get": {
+                "tags": ["Logs"],
+                "summary": "delete a List the logs pmz",
+                "operationId": "deleteListLogPmz",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "type_object",
+                    "in": "query",
+                    "description": "Tipo de Log",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "status_code",
+                    "in": "query",
+                    "description": "Status do Log",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/logs/delete-many-log-linx": {
+            "get": {
+                "tags": ["Logs"],
+                "summary": "delete a List the logs linx",
+                "operationId": "deleteListLogLinx",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "type_object",
+                    "in": "query",
+                    "description": "Tipo de Log",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "synchronize",
+                    "in": "query",
+                    "description": "Status do Log true (0) / false (1)",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/logs/post-log-pmz-linx": {
+            "get": {
+                "tags": ["Logs"],
+                "summary": "send a List the logs  pmz to linx",
+                "operationId": "postLogPmzLinx",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "type_object",
+                    "in": "query",
+                    "description": "type_object do Log",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "status_code",
+                    "in": "query",
+                    "description": "Status do Log",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "synchronize",
+                    "in": "query",
+                    "description": "Status do Log true (0) / false (1)",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/clientsIntegration": {
+            "get": {
+                "tags": ["Clientes"],
+                "summary": "Insert client PMZ >> LINX",
+                "operationId": "getClient",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "codigo",
+                    "in": "query",
+                    "description": "Código do cliente",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "empresa",
+                    "in": "query",
+                    "description": "código da filial",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/lancamentoIntegration": {
+            "get": {
+                "summary": "Insert lancamento PMZ >> LINX",
+                "operationId": "getLancamento",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "recnum",
+                    "in": "query",
+                    "description": "recnum do lancamento",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/clientsIntegration/grupo_loja": {
+            "get": {
+                "tags": ["Clientes"],
+                "summary": "Insert grupo_loja PMZ >> LINX",
+                "operationId": "getGrupoLoja",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "id_grupo",
+                    "in": "query",
+                    "description": "id do grupo de loja",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/providerIntegration": {
+            "get": {
+                "tags": ["Fornecedores"],
+                "summary": "Insert provider PMZ >> LINX",
+                "operationId": "getProvider",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "codigo",
+                    "in": "query",
+                    "description": "Código do cliente",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "empresa",
+                    "in": "query",
+                    "description": "código da filial",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/transportadoraIntegration": {
+            "get": {
+                "tags": ["Transportadora"],
+                "summary": "Insert transportadora PMZ >> LINX",
+                "operationId": "getTransportadora",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "codigo",
+                    "in": "query",
+                    "description": "Código da transportadora",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/funcionarioIntegration": {
+            "get": {
+                "tags": ["Funcionarios"],
+                "summary": "Insert funcionário PMZ >> LINX",
+                "operationId": "getEmployee",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "codigo",
+                    "in": "query",
+                    "description": "Código do funcionário",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/produtoIntegration": {
+            "get": {
+                "tags": ["Produtos"],
+                "summary": "Insert product PMZ >> LINX",
+                "operationId": "getProduct",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "codigo",
+                    "in": "query",
+                    "description": "Código do produto",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "empresa",
+                    "in": "query",
+                    "description": "código da filial",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "fornecedor",
+                    "in": "query",
+                    "description": "código do fornecedor",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/notasIntegration/nota/n": {
+            "get": {
+                "tags": ["Notas/Cupons"],
+                "summary": "Insert nota emissão propria PMZ >> LINX",
+                "operationId": "getNotaEmissaoPropria",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "filial",
+                    "in": "query",
+                    "description": "codigo da filial",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "nota",
+                    "in": "query",
+                    "description": "código da nota",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "serie",
+                    "in": "query",
+                    "description": "serie da nota",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/notasIntegration/cupom/c": {
+            "get": {
+                "tags": ["Notas/Cupons"],
+                "summary": "Insert cupom PMZ >> LINX",
+                "operationId": "getCupom",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "filial",
+                    "in": "query",
+                    "description": "codigo da filial",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "cupom",
+                    "in": "query",
+                    "description": "código da nota",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "serie",
+                    "in": "query",
+                    "description": "serie da nota",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "emissao",
+                    "in": "query",
+                    "description": "emissao da nota",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/notasIntegration/transferencia/t": {
+            "get": {
+                "tags": ["Notas/Cupons"],
+                "summary": "Insert emissão de transferencia PMZ >> LINX",
+                "operationId": "getTransferencia",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "filial",
+                    "in": "query",
+                    "description": "codigo da filial",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "nota",
+                    "in": "query",
+                    "description": "código da nota",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "serie",
+                    "in": "query",
+                    "description": "serie da nota",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/notasIntegration/nota/nt": {
+            "get": {
+                "tags": ["Notas/Cupons"],
+                "summary": "Insert nota emissão terceiros PMZ >> LINX",
+                "operationId": "getNotaEmissaoTerceiros",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "filial",
+                    "in": "query",
+                    "description": "codigo da filial",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "nota",
+                    "in": "query",
+                    "description": "código da nota",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "serie",
+                    "in": "query",
+                    "description": "serie da nota",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "fornecedor_emp",
+                    "in": "query",
+                    "description": "código do fornecedor emp",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "fornecedor_cod",
+                    "in": "query",
+                    "description": "código do fornecedor",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/lancamentoIntegration": {
+            "get": {
+                "tags": ["Lançamentos"],
+                "summary": "Insert lancamentos titulo incluir PMZ >> LINX",
+                "operationId": "getLancamentosIncluir",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "recnum",
+                    "in": "query",
+                    "description": "recnum do lancamento",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        },
+        "/api/millenium-pmz/lancamentoIntegration/titulo_baixar": {
+            "get": {
+                "tags": ["Lançamentos"],
+                "summary": "Insert lancamentos titulo baixar PMZ >> LINX",
+                "operationId": "getLancamentosBaixar",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "filial",
+                    "in": "query",
+                    "description": "filial do documento",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "documento",
+                    "in": "query",
+                    "description": "numero do documento",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                },
+                {
+                    "name": "duplicata",
+                    "in": "query",
+                    "description": "duplicata do documento",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "style": "simple"
+                }
+            ]
+        }
+    },
+    "definitions": {
+        "id": {
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "data": {
+            "response": {
+                "success": {
+                    "type": "boolean"
+                },
+                "data": {
+                    "type": "object"
+                }
+            }
+        },
+        "message": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "pdf": {
+            "type": "binary",
+            "properties": {
+                "data": {
+                    "type": "string"
+                }
+            }
+        },
+        "logs": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "action_type": {
+                    "type": "string"
+                },
+                "type_object": {
+                    "type": "string"
+                },
+                "json_pmz": {
+                    "type": "string"
+                },
+                "status_code": {
+                    "type": "string"
+                },
+                "synchronize": {
+                    "type": "string"
+                },
+                "params": {
+                    "type": "string"
+                },
+                "method_linx": {
+                    "type": "string"
+                },
+                "json_linx": {
+                    "type": "string"
+                },
+                "trans_id": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "__v": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
