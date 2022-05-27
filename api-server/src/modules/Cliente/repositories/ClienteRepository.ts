@@ -7,28 +7,28 @@ class ClienteRepository {
     public async findById({
         id
       }: IRequestCliente): Promise<ICliente> {
-        const dataCliente = await knex.raw(`SELECT * FROM Clientes WHERE id = ${id}`);
+        const dataCliente = await knex.raw(`SELECT * FROM clientes WHERE id = ${id}`);
         return dataCliente[0];
       }
 
     public async getTerm({
         term
       }: IRequestCliente): Promise<ICliente> {
-        const dataCliente = await knex.raw(`SELECT * FROM Clientes WHERE code LIKE '%${term}%'`);
+        const dataCliente = await knex.raw(`SELECT * FROM clientes WHERE code LIKE '%${term}%'`);
         return dataCliente[0];
       }
     
     public async get({
         page, itemsPerPage
       }: IRequestCliente): Promise<ICliente> {
-        const dataCliente = await knex.raw('SELECT * FROM Clientes');
+        const dataCliente = await knex.raw('SELECT * FROM clientes');
         return dataCliente[0];
       }
 
     public async delete(
       id: Number
       ): Promise<ICliente> {
-        const dataCliente = await knex.raw(`DELETE Clientes WHERE id = ${id}`);
+        const dataCliente = await knex.raw(`DELETE clientes WHERE id = ${id}`);
         return dataCliente[0];
       }
 
@@ -39,7 +39,7 @@ class ClienteRepository {
         const trx = await knex.transaction();
         try {
 
-            const resultCliente: any = await trx('Clientes').insert(data);
+            const resultCliente: any = await trx('clientes').insert(data);
 
             if (!resultCliente) {
                 trx.rollback();
@@ -68,7 +68,7 @@ class ClienteRepository {
          const trx = await knex.transaction();
         try {
 
-            const resultCliente: any = await trx('Clientes')
+            const resultCliente: any = await trx('clientes')
             .update(data)
             .where("Id", data.id);
 
