@@ -1,7 +1,7 @@
-import knex from "@shared/database/connection";
+import knex from "../../../shared/database/connection";
 import ICliente from "../entities/ICliente";
 import IRequestCliente from "../requestValidateInteface/IRequestCliente";
-import { IResponseCRUD }  from "@shared/interfaces/IResponseCRUD";
+import { IResponseCRUD }  from "../../../shared/interfaces/IResponseCRUD";
 
 class ClienteRepository {
     public async findById({
@@ -47,7 +47,7 @@ class ClienteRepository {
             }
             return resultCliente;
 
-        } catch (error) {
+        } catch (error: any) {
             trx.rollback();
             return {
                 success: false,
@@ -78,7 +78,7 @@ class ClienteRepository {
             }
             return resultCliente;
 
-        } catch (error) {
+        } catch (error: any) {
             trx.rollback();
             return {
                 success: false,

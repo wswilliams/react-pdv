@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { HttpResponse, ok } from "@shared/helpers/httphelper";
-import IRequestCliente from "@modules/Cliente/requestValidateInteface/IRequestCliente";
-import ClienteService from "@modules/Cliente/services/ClienteService"
+import { HttpResponse, ok } from "../../../shared/helpers/httphelper";
+import IRequestCliente from "../../../modules/Cliente/requestValidateInteface/IRequestCliente";
+import ClienteService from "../../../modules/Cliente/services/ClienteService"
 import ClienteRepository from "../repositories/ClienteRepository";
 
 const iClienteRepository = new ClienteRepository();

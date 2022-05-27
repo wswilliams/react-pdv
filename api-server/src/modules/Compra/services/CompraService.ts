@@ -1,6 +1,6 @@
 import { Request } from "express";
-import { badRequest, notFound, ok, serverError } from "@shared/helpers/httphelper";
-import  {IJsonResponse} from "@shared/interfaces/IJsonResponse";
+import { badRequest, notFound, ok, serverError } from "../../../shared/helpers/httphelper";
+import  {IJsonResponse} from "../../../shared/interfaces/IJsonResponse";
 import CompraRepository from "../repositories/CompraRepository";
 import IRequestCompra from "../requestValidateInteface/IRequestCompra";
 import CompraDTO from "../entities/CompraDTO";

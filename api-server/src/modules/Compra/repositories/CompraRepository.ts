@@ -1,8 +1,8 @@
-import knex from "@shared/database/connection";
+import knex from "../../../shared/database/connection";
 import ICompra from "../entities/ICompra";
 import IRequestCompra from "../requestValidateInteface/IRequestCompra";
-import { IResponseCRUD }  from "@shared/interfaces/IResponseCRUD";
-import IProduto from "@modules/Produto/entities/IProduto";
+import { IResponseCRUD }  from "../../../shared/interfaces/IResponseCRUD";
+import IProduto from "../../../modules/Produto/entities/IProduto";
 
 class CompraRepository {
     public async findById({
@@ -151,7 +151,7 @@ class CompraRepository {
              trx.commit();
             return resultCompra;
 
-        } catch (error) {
+        } catch (error: any) {
             trx.rollback();
             return {
                 success: false,
@@ -208,7 +208,7 @@ class CompraRepository {
              trx.commit();
             return resultCompra;
 
-        } catch (error) {
+        } catch (error: any) {
             trx.rollback();
             return {
                 success: false,

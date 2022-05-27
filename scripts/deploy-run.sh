@@ -60,7 +60,7 @@ fi
 
     echo "GERAR UM NOVO BUILD FRONTEND"
     # Buil frontend project   
-    yarn build
+    npm run build
 
     # Start frontend project
     echo "EXCLUIR A API FRONTEND DO PM2"

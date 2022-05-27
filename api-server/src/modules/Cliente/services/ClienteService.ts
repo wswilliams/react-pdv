@@ -1,6 +1,6 @@
 import { Request } from "express";
-import { badRequest, notFound, ok, serverError } from "@shared/helpers/httphelper";
-import  {IJsonResponse} from "@shared/interfaces/IJsonResponse";
+import { badRequest, notFound, ok, serverError } from "../../../shared/helpers/httphelper";
+import  {IJsonResponse} from "../../../shared/interfaces/IJsonResponse";
 import ClienteRepository from "../repositories/ClienteRepository";
 import IRequestCliente from "../requestValidateInteface/IRequestCliente";
 import ClienteDTO from "../entities/ClienteDTO";

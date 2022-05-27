@@ -1,5 +1,5 @@
-import swaggerUi from 'swagger-ui-express';
-import { default as documentSwagger } from "./swagger.json";
+// import swaggerUi from 'swagger-ui-express';
+//import { default as documentSwagger } from "./swagger.json";
 import express from 'express';
 import routes from './shared/http/routes';
 import morgan from 'morgan';
@@ -26,10 +26,10 @@ if (process.env.NODE_ENV === 'production') {
   app.use(helmet());
   // console.log = function () { }
 }
-app.use(`${contextPath}/swagger`, swaggerUi.serve, swaggerUi.setup(documentSwagger));
+// app.use(`${contextPath}/swagger`, swaggerUi.serve, swaggerUi.setup(documentSwagger));
 
 const port = process.env.BACK_PORT;
-const server = `http://${process.env.BACKEND_HOST}:${port}${contextPath}/swagger`;
+const server = `http://${process.env.BACKEND_HOST}:${port}${contextPath}`;
 
 if (cluster.isMaster) {
   console.log('Master process is running');

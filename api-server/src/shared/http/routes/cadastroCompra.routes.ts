@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import CompraControllers from "@modules/Compra/controllers/CompraControllers";
+import CompraControllers from "../../../modules/Compra/controllers/CompraControllers";
 
 const cadastroCompraRouter = Router();
 const compraControllers = new CompraControllers();

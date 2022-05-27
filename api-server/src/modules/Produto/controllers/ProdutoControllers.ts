@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { HttpResponse, ok } from "@shared/helpers/httphelper";
-import IRequestProduto from "@modules/Produto/requestValidateInteface/IRequestProduto";
-import ProdutoService from "@modules/Produto/services/ProdutoService"
+import { HttpResponse, ok } from "../../../shared/helpers/httphelper";
+import IRequestProduto from "../../../modules/Produto/requestValidateInteface/IRequestProduto";
+import ProdutoService from "../../../modules/Produto/services/ProdutoService"
 import ProdutoRepository from "../repositories/ProdutoRepository";
 
 const iProdutoRepository = new ProdutoRepository();

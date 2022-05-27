@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import CadastroClienteController from "@modules/Cliente/controllers/ClienteControllers";
+import CadastroClienteController from "../../../modules/Cliente/controllers/ClienteControllers";
 
 const cadastroClienteRouter = Router();
 const cadastroClienteController = new CadastroClienteController();

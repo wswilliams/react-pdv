@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { HttpResponse, ok } from "@shared/helpers/httphelper";
-import IRequestCompra from "@modules/Compra/requestValidateInteface/IRequestCompra";
-import CompraService from "@modules/Compra/services/CompraService"
+import { HttpResponse, ok } from "../../../shared/helpers/httphelper";
+import IRequestCompra from "../../../modules/Compra/requestValidateInteface/IRequestCompra";
+import CompraService from "../../../modules/Compra/services/CompraService"
 import CompraRepository from "../repositories/CompraRepository";
 const fs = require('fs');
 
