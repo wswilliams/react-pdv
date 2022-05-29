@@ -9,14 +9,14 @@ class CompraRepository {
         id
       }: IRequestCompra): Promise<Array<ICompra>> {
 
-        const dataCompra = await knex.raw(`SELECT * FROM compras WHERE id = ${id}`);
+        const dataCompra = await knex.raw(`SELECT * FROM Compras WHERE id = ${id}`);
 
       return dataCompra[0]
       }
        
      public async findProdutosCompra(id: Number): Promise<Array<IProduto>> {
 
-        const dataCompraProduto = await knex.raw(`SELECT * FROM compra_produtos WHERE id_compra = ${id}`);
+        const dataCompraProduto = await knex.raw(`SELECT * FROM Compra_produtos WHERE id_compra = ${id}`);
         return dataCompraProduto[0];
       }
 
@@ -29,7 +29,7 @@ class CompraRepository {
      
         for (let value of result) {
          
-          const result_produtos = await knex.raw(`SELECT * FROM produtos WHERE id = ${value.id_produto}`);
+          const result_produtos = await knex.raw(`SELECT * FROM Produtos WHERE id = ${value.id_produto}`);
           
          list.push(result_produtos[0]); 
 
@@ -40,32 +40,32 @@ class CompraRepository {
     public async getTerm({
         term
       }: IRequestCompra): Promise<ICompra> {
-        const dataCompra = await knex.raw(`SELECT * FROM compras WHERE tipo_pagamento LIKE '%${term}%'`);
+        const dataCompra = await knex.raw(`SELECT * FROM Compras WHERE tipo_pagamento LIKE '%${term}%'`);
         return dataCompra[0];
       }
     
     public async get({
         page, itemsPerPage
       }: IRequestCompra): Promise<ICompra> {
-        const dataCompra = await knex.raw(`SELECT * FROM compras`);
+        const dataCompra = await knex.raw(`SELECT * FROM Compras`);
         return dataCompra[0];
       }
 
       public async getSum(): Promise<ICompra> {
-        const dataCompra = await knex.raw(`SELECT SUM(total) as total FROM compras 
+        const dataCompra = await knex.raw(`SELECT SUM(total) as total FROM Compras 
         where data_criacao >= DATE_SUB( DATE( NOW() ), INTERVAL DAY( NOW() ) -1 DAY )`);
         return dataCompra[0];
       }
 
       public async getCount(): Promise<ICompra> {
-        const dataCompra = await knex.raw(`SELECT count(id) as total FROM compras 
+        const dataCompra = await knex.raw(`SELECT count(id) as total FROM Compras 
         where data_criacao >= DATE_SUB( DATE( NOW() ), INTERVAL DAY( NOW() ) -1 DAY )`);
         return dataCompra[0];
       }
 
       public async getRelatorioMesCompras(query: any): Promise<Array<any>> {
 
-        const compras = await knex.raw(`SELECT * FROM compras where data_criacao BETWEEN '${query.startDate}' AND '${query.endDate}'`);
+        const compras = await knex.raw(`SELECT * FROM Compras where data_criacao BETWEEN '${query.startDate}' AND '${query.endDate}'`);
         const listCompras = JSON.parse(JSON.stringify(compras[0]));
  
         let list = [];
@@ -85,7 +85,7 @@ class CompraRepository {
     public async delete(
       id: Number
       ): Promise<ICompra> {
-        const dataCompra = await knex.raw(`DELETE FROM compras WHERE id = id`);
+        const dataCompra = await knex.raw(`DELETE FROM Compras WHERE id = id`);
         return dataCompra[0];
       }
 
@@ -101,11 +101,10 @@ class CompraRepository {
             delete data.produtos;
             let valueTotal = 0;
            
-            const resultCompra: any = await trx('compras').insert(data);
+            const resultCompra: any = await trx('Compras').insert(data);
             
             if (!resultCompra) {
                 trx.rollback();
-                console.log("resultCompra",resultCompra)
                 throw new Error("Error na inserção do Compra!");
             }
             //produtos_compras
@@ -119,10 +118,9 @@ class CompraRepository {
 
                 valueTotal += (value.amount * value.preco);
              
-                const result_compra_produtos: any = await trx('compra_produtos').insert(data_value);
+                const result_compra_produtos: any = await trx('Compra_produtos').insert(data_value);
                 if (!result_compra_produtos) {
                   trx.rollback();
-                  console.log("result_compra_produtos",result_compra_produtos)
                   throw new Error("Error na inserção do Compra!");
                 }
                 const diminuiDoStock = value.quantidade - value.amount;
@@ -131,24 +129,22 @@ class CompraRepository {
                   throw new Error("Error não há produto sucifiente para essa compra!");
                 }  
 
-                const resultProduto: any = await trx('produtos')
+                const resultProduto: any = await trx('Produtos')
                 .update({quantidade: diminuiDoStock})
                 .where("Id", value.id);
 
                 if (!resultProduto) {
                     trx.rollback();
-                    console.log("resultProduto",resultProduto)
                     throw new Error("Error na alterar do Produto!");
                 }
 
             }
-            const updateProduto: any = await trx('compras')
+            const updateProduto: any = await trx('Compras')
             .update({total: valueTotal})
             .where("Id", resultCompra[0]);
 
             if (!updateProduto) {
                 trx.rollback();
-                console.log("updateProduto",updateProduto)
                 throw new Error("Error na alterar do Produto!");
             }
 
@@ -157,7 +153,6 @@ class CompraRepository {
 
         } catch (error: any) {
             trx.rollback();
-            console.log("error",error)
             return {
                 success: false,
                 message: 'Não foi possível inserir o Compra',
@@ -189,7 +184,7 @@ class CompraRepository {
                 throw new Error("Error na alterar do Compra!");
             }
 
-            const delete_produtos_compras = await trx.raw(`DELETE FROM compra_produtos WHERE id_compra = ${data.id}`);
+            const delete_produtos_compras = await trx.raw(`DELETE FROM Compra_produtos WHERE id_compra = ${data.id}`);
             if (!delete_produtos_compras) {
               trx.rollback();
               throw new Error("Error na alteração da Compra!");
@@ -203,7 +198,7 @@ class CompraRepository {
                 quantidade: value.quantidade
             }
 
-              const result_compra_produtos: any = await trx('compra_produtos').insert(data_value);
+              const result_compra_produtos: any = await trx('Compra_produtos').insert(data_value);
               if (!result_compra_produtos) {
                 trx.rollback();
                 throw new Error("Error na inserção do Compra!");

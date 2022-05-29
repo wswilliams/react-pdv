@@ -7,32 +7,32 @@ class ProdutoRepository {
     public async findById({
         id
       }: IRequestProduto): Promise<IProduto> {
-        const dataProduto = await knex.raw(`SELECT * FROM produtos WHERE id = ${id}`);
+        const dataProduto = await knex.raw(`SELECT * FROM Produtos WHERE id = ${id}`);
         return dataProduto[0];
       }
 
     public async getTerm({
         term
       }: IRequestProduto): Promise<IProduto> {
-        const dataProduto = await knex.raw(`SELECT * FROM produtos WHERE nome LIKE '%${term}%'`);
+        const dataProduto = await knex.raw(`SELECT * FROM Produtos WHERE nome LIKE '%${term}%'`);
         return dataProduto[0];
       }
     
     public async get({
         page, itemsPerPage
       }: IRequestProduto): Promise<IProduto> {
-        const dataProduto = await knex.raw(`SELECT * FROM produtos`);
+        const dataProduto = await knex.raw(`SELECT * FROM Produtos`);
         return dataProduto[0];
       }
 
       public async getCount(): Promise<IProduto> {
-        const dataProduto = await knex.raw(`SELECT count(id) as total FROM produtos`);
+        const dataProduto = await knex.raw(`SELECT count(id) as total FROM Produtos`);
         return dataProduto[0];
       }
     public async delete(
       id: Number
       ): Promise<IProduto> {
-        const dataProduto = await knex.raw(`DELETE from produtos WHERE id = ${id}`);
+        const dataProduto = await knex.raw(`DELETE from Produtos WHERE id = ${id}`);
         return dataProduto[0];
       }
 
@@ -44,7 +44,7 @@ class ProdutoRepository {
         try {
             delete data.id;
             delete data.data_atualizacao;
-            const resultProduto: any = await trx('produtos').insert(data);
+            const resultProduto: any = await trx('Produtos').insert(data);
             console.log(resultProduto)
 
             if (!resultProduto) {
@@ -75,7 +75,7 @@ class ProdutoRepository {
          const trx = await knex.transaction();
         try {
 
-            const resultProduto: any = await trx('produtos')
+            const resultProduto: any = await trx('Produtos')
             .update(data)
             .where("Id", data.id);
 
