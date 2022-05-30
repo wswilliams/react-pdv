@@ -65,7 +65,7 @@ class CompraRepository {
 
       public async getRelatorioMesCompras(query: any): Promise<Array<any>> {
 
-        const compras = await knex.raw(`SELECT * FROM compras where data_criacao BETWEEN '${query.startDate}' AND '${query.endDate}'`);
+        const compras = await knex.raw(`SELECT * FROM compras where data_criacao BETWEEN '${query.startDate} 01:01:00' AND '${query.endDate} 23:59:59'`);
         const listCompras = JSON.parse(JSON.stringify(compras[0]));
  
         let list = [];

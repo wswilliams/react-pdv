@@ -210,6 +210,10 @@ height: auto;
 
   `}
 
-
+  .daterangepicker-control-section {
+    max-width: 246px;
+    margin: 30px auto;
+    padding-top: 50px;
+  }
 
 `;

@@ -41,7 +41,7 @@ class CompraController {
             endDate: query.endDate ? String(query.endDate) : undefined
         }
         const pathFile = await serviceCompra.getRelatorioMesCompras(log);
-
+        
         loadPDF();
 
         function loadPDF() {

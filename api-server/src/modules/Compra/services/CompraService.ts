@@ -7,6 +7,7 @@ import CompraDTO from "../entities/CompraDTO";
 import CompraProdutoDTO from "../entities/CompraProdutoDTO";
 import ICompra from "../entities/ICompra";
 import { ReportPdf } from "./reportPdf";
+import moment from "moment";
 
 const reportPdf = new ReportPdf();
 
@@ -124,6 +125,7 @@ class CompraService {
 
     public async getRelatorioMesCompras(log: any): Promise<string> {
         try {
+           
             const docs = await this.iCompraRepository.getRelatorioMesCompras(log);
   
             return await reportPdf.execute(docs || [], log);
