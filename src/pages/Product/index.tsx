@@ -5,6 +5,7 @@ import { formatPrice } from '../../utils/formatPrice';
 import { ProductList } from '../../components/ProductList';
 import { useDispatch } from 'react-redux';
 import * as s from '../Dashboard/styled';
+import bebidas from '../../assets/images/my-icon.svg';
 import {
   FiGrid, FiEdit
 } from 'react-icons/fi';
@@ -31,7 +32,7 @@ const Product:React.FC = () => {
   const [idProdutc, setIdProdutc] = useState<number>(0);
   const [nome, setNome] = useState<string>('');
   const [descricao, setDescricao] = useState<string>('');
-  const [preco, setPreco] = useState<number>(0);
+  const [preco, setPreco] = useState<string>('');
   const [quantidade, setQuantidade] = useState<number>(0);
   const [sucesso, setSucesso] = useState<Boolean>(false);
   const [errors, setErrors,] = useState<Boolean>(false);
@@ -89,7 +90,7 @@ const Product:React.FC = () => {
     setDescricao(event?.currentTarget?.value)
   }
   const onChangePreco = (event: ChangeEvent<{ value: string }>) => {
-    setPreco(Number(event?.currentTarget?.value))
+    setPreco(event?.currentTarget?.value)
   }
   const onChangeQuantidade = (event: ChangeEvent<{ value: string }>) => {
     setQuantidade(Number(event?.currentTarget?.value))
@@ -98,7 +99,7 @@ const Product:React.FC = () => {
     setIdProdutc(0)
     setNome('')
     setDescricao('')
-    setPreco(0)
+    setPreco('')
     setQuantidade(0)
   }
 
@@ -110,7 +111,7 @@ const Product:React.FC = () => {
     setIdProdutc(params.id)
     setNome(params.nome)
     setDescricao(params.descricao)
-    setPreco(params.preco)
+    setPreco(JSON.stringify(params.preco))
     setQuantidade(params.quantidade)
   }
 
@@ -120,7 +121,7 @@ const Product:React.FC = () => {
       id: idProdutc,
       nome: nome,
       descricao: descricao,
-      preco: preco,
+      preco: parseFloat(preco),
       quantidade: quantidade
     }
     if(produto.id == 0)
@@ -171,14 +172,17 @@ const Product:React.FC = () => {
         <ProductList>
             {products.map((product) => (
               <li key={product.id}>
-                <img src={product.image} alt={product.nome} />
+                <img src={bebidas} alt={product.nome} />
                 <span>
-                  <strong>{product.descricao} DSP: {product.quantidade} </strong>
+                <strong>{product.nome}</strong>
                   <p>{product.priceFormatted}</p>
+                  <strong>{product.descricao} DSP: {product.quantidade} </strong>
                 </span>
+                <span>
                 <button id="add" type="button" onClick={() => handleUpdatedProduct(product)}>
                   <FiEdit size="24px" color="grey" />
                 </button>
+                </span>
               </li>
             ))}
           </ProductList>

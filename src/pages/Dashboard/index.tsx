@@ -3,7 +3,7 @@ import React, { useEffect, useState, ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import {
-  FiDollarSign, FiCreditCard, FiHardDrive, FiSearch,  FiPlusCircle,FiTrash2,FiMinusCircle
+  FiDollarSign, FiCreditCard, FiHardDrive, FiSearch,  FiPlusCircle,FiTrash2,FiMinusCircle, FiShoppingCart
 } from 'react-icons/fi';
 
 import * as s from './styled';
@@ -12,6 +12,7 @@ import Layout from '../../components/Layout';
 import api from '../../service/api';
 import { formatPrice } from '../../utils/formatPrice';
 import { ProductList } from '../../components/ProductList';
+import bebidas from '../../assets/images/my-icon.svg';
 
 export interface Stock {
   id: number;
@@ -167,12 +168,14 @@ const Dashboard: React.FC = () => {
       <ProductList>
         {products.map((product) => (
           <li key={product.id}>
-            <img alt={product.nome} />
+            
+            <img src={bebidas} alt={product.nome} />
             <span>
-              <strong>{product.descricao} /QTD: {product.quantidade}</strong>
+             <strong>{product.nome}</strong>              
               <p>{product.priceFormatted}</p>
+              <strong>{product.descricao} /QTD: {product.quantidade}</strong>
             </span>
-
+            <span>
             <button id="add" type="button" onClick={() => handleAddProduct(product)}>
               <FiPlusCircle size="24px" color="grey" />
             </button>
@@ -182,6 +185,8 @@ const Dashboard: React.FC = () => {
             <button id="delete" type="button" onClick={() => handleRemoveProduct(product)}>
               <FiTrash2 size="24px" color="grey" />
             </button>
+            </span>
+
           </li>
         ))}
       </ProductList>
