@@ -5,7 +5,7 @@ const connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
   user: "root",
-  password: "123",
+  password: "",
 });
 
 // Run create database statement
@@ -31,7 +31,7 @@ connection.query(
   )
   ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_0900_ai_ci;`,
+  ;`,
   function (err: any, results: any) {
     console.log(results);
     console.log(err);
@@ -50,7 +50,7 @@ connection.query(
   )
   ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_0900_ai_ci;`,
+  ;`,
   function (err: any, results: any) {
     console.log(results);
     console.log(err);
@@ -69,7 +69,7 @@ connection.query(
   )
   ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_0900_ai_ci;`,
+  ;`,
   function (err: any, results: any) {
     console.log(results);
     console.log(err);

@@ -151,7 +151,7 @@ class CompraRepository {
              trx.commit();
             return resultCompra;
 
-        } catch (error: any) {
+        } catch (error) {
             trx.rollback();
             return {
                 success: false,
@@ -208,7 +208,7 @@ class CompraRepository {
              trx.commit();
             return resultCompra;
 
-        } catch (error: any) {
+        } catch (error) {
             trx.rollback();
             return {
                 success: false,

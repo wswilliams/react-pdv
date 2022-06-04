@@ -47,7 +47,7 @@ class ClienteRepository {
             }
             return resultCliente;
 
-        } catch (error: any) {
+        } catch (error) {
             trx.rollback();
             return {
                 success: false,
@@ -78,7 +78,7 @@ class ClienteRepository {
             }
             return resultCliente;
 
-        } catch (error: any) {
+        } catch (error) {
             trx.rollback();
             return {
                 success: false,

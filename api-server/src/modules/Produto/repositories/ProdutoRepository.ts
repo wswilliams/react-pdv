@@ -54,7 +54,7 @@ class ProdutoRepository {
             trx.commit();
             return resultProduto;
 
-        } catch (error: any) {
+        } catch (error) {
             trx.rollback();
             return {
                 success: false,
@@ -86,7 +86,7 @@ class ProdutoRepository {
             trx.commit();
             return resultProduto;
 
-        } catch (error: any) {
+        } catch (error) {
             trx.rollback();
             return {
                 success: false,
