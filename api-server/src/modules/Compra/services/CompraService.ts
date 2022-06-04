@@ -127,7 +127,7 @@ class CompraService {
         try {
            
             const docs = await this.iCompraRepository.getRelatorioMesCompras(log);
-  
+            console.log("docs",docs)
             return await reportPdf.execute(docs || [], log);
         } catch (error) {
             return JSON.stringify(error);

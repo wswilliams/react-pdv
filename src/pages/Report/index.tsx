@@ -3,6 +3,7 @@ import * as s from '../Dashboard/styled';
 import Layout from '../../components/Layout';
 import DatePicker from "react-datepicker";
 import api from '../../service/api';
+import axios from 'axios';
 import Moment from 'moment';
 
 
@@ -49,11 +50,16 @@ const Report: React.FC = () => {
         endDate: Moment(endDate).format("YYYY-MM-DD")
       }
   
-      await api.get<[]>(
-            `compras/relatorio/mes?startDate=${datas.startDate}&endDate=${datas.endDate}`,
-          ) .then(response => response.data)
-          .then(data => {
-            console.log(data)
+        await fetch(
+          `http://localhost:3355/api/generec/compras/relatorio/mes?startDate=${datas.startDate}&endDate=${datas.endDate}`
+          ).then(response => {
+            response.blob().then(blob => {
+              let url = window.URL.createObjectURL(blob);
+              let a = document.createElement('a');
+              a.href = url;
+              a.download = `RELATORIO-DE-VENDAS-${Moment().format()}.pdf`;
+              a.click();
+            });
           }).catch(erro => {
             const data = [erro]
             console.log(data)
