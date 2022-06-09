@@ -5,7 +5,7 @@ const connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
   user: "root",
-  password: "",
+  password: "1234",
 });
 
 // Run create database statement
@@ -30,8 +30,7 @@ connection.query(
     CONSTRAINT produtos_PK PRIMARY KEY (id)
   )
   ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4
-  ;`,
+  DEFAULT CHARSET=utf8mb4;`,
   function (err: any, results: any) {
     console.log(results);
     console.log(err);
@@ -49,8 +48,7 @@ connection.query(
     CONSTRAINT compras_PK PRIMARY KEY (id)
   )
   ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4
-  ;`,
+  DEFAULT CHARSET=utf8mb4;`,
   function (err: any, results: any) {
     console.log(results);
     console.log(err);
@@ -68,8 +66,7 @@ connection.query(
     CONSTRAINT compra_produtos_PK PRIMARY KEY (id)
   )
   ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4
-  ;`,
+  DEFAULT CHARSET=utf8mb4;`,
   function (err: any, results: any) {
     console.log(results);
     console.log(err);

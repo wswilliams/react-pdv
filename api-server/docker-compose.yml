@@ -1,0 +1,37 @@
+version: '2.2'
+services: 
+
+  api-service:
+    build:
+      dockerfile: ./Dockerfile
+      context: ${BACKEND_PATH}
+    image:  pdv
+    container_name: ${API_NAME}
+    command: bash -c "npm i && npm start"
+    user: root
+    environment:
+      - TZ=$TZ
+      - NODE_ENV=development
+    working_dir: /app
+    restart: unless-stopped
+    ports: 
+      - ${BACK_PORT}:${BACK_PORT}
+    volumes: 
+      - ${BACKEND_PATH}:/app
+#    depends_on:
+#      - mysqldb
+#  mysqldb:
+#    image: mysql:latest
+#    container_name: ${API_NAME}
+#    restart: unless-stopped
+#    environment:
+#      TZ: $TZ
+#      MYSQL_USER: ${MYSQL_USER}
+#      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+#      MYSQL_ALLOW_EMPTY_PASSWORD: ${MYSQL_PASSWORD}
+#      MYSQL_RANDOM_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+#      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+#    ports: 
+#      - ${MYSQL_PORT}:${MYSQL_PORT}
+#    volumes:
+#      - ./mysql/data:/data/db
