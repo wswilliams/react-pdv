@@ -35,3 +35,6 @@ services:
 #      - ${MYSQL_PORT}:${MYSQL_PORT}
 #    volumes:
 #      - ./mysql/data:/data/db
+
+
+#docker run --name mysql-container -d -v /var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=test -e MYSQL_USER=1234 -e MYSQL_PASSWORD=1234 mysql:5.7s
