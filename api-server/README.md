@@ -15,22 +15,15 @@ Objetivo: PDV SIMLES
 
 Clone repository - api-pdv (branch: main)
 
-    git clone -b develop http://192.168.151.85:8087/pmz-hmt/api-generic/tree/develop 
+    git clone (https://github.com/wswilliams/react-pdv.git)
 
-
-## Executar aplicação 
-
-### Executar mongodb via docker-compose
-```
-docker-compose up -d
-```
 
 ### Install dependences mode NPM or YARN
 ```
-npm install or yarn 
+npm install
 ```
 
 ### Run project
 ```
-npm start or yarn start
+npm start
 ```
