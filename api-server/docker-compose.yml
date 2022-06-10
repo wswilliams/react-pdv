@@ -15,26 +15,6 @@ services:
     working_dir: /app
     restart: unless-stopped
     ports: 
-      - ${BACK_PORT}:${BACK_PORT}
+      - 3355:3355
     volumes: 
       - ${BACKEND_PATH}:/app
-#    depends_on:
-#      - mysqldb
-#  mysqldb:
-#    image: mysql:latest
-#    container_name: ${API_NAME}
-#    restart: unless-stopped
-#    environment:
-#      TZ: $TZ
-#      MYSQL_USER: ${MYSQL_USER}
-#      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
-#      MYSQL_ALLOW_EMPTY_PASSWORD: ${MYSQL_PASSWORD}
-#      MYSQL_RANDOM_ROOT_PASSWORD: ${MYSQL_PASSWORD}
-#      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-#    ports: 
-#      - ${MYSQL_PORT}:${MYSQL_PORT}
-#    volumes:
-#      - ./mysql/data:/data/db
-
-
-#docker run --name mysql-container -d -v /var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=test -e MYSQL_USER=1234 -e MYSQL_PASSWORD=1234 mysql:5.7s
