@@ -45,6 +45,10 @@ const Dashboard: React.FC = () => {
   const [totalCaixa, setTotalCaixa] = useState<Number>(0);
   const [countVendas, setCountVendas]= useState<Number>(0);
   const [countProdutos, setCountProdutos]= useState<Number>(0);
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+ 
+  const [ data_hoje, setdDtaHoje] = useState<String>(today.toLocaleDateString());
 
   const dispatch = useDispatch();
 
@@ -122,7 +126,7 @@ const Dashboard: React.FC = () => {
             CAIXA ABERTO
           </span>
           <span className="date">
-            Sexta, 10 julho 2020
+          {data_hoje}
           </span>
         </s.Info>
       </s.Header>
