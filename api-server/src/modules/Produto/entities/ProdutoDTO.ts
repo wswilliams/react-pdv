@@ -10,8 +10,8 @@ const ProdutoDTO = (
         descricao: iProduto.descricao,
         preco: iProduto.preco,
         quantidade: iProduto.quantidade,
-        data_criacao: moment().format(),
-        data_atualizacao: moment().format()
+        data_criacao: moment().format('YYYY-MM-DD HH:mm:ss'),
+        data_atualizacao: moment().format('YYYY-MM-DD HH:mm:ss')
     }
     return object;
 };

@@ -7,7 +7,7 @@ const CompraDTO = (
     const object = {
         id: iCompra.id,
         total: iCompra.total,
-        data_criacao: moment().format(),
+        data_criacao: moment().format('YYYY-MM-DD HH:mm:ss'),
         tipo_pagamento: iCompra.tipo_pagamento,
         status: iCompra.status,
         produtos: iCompra.produtos

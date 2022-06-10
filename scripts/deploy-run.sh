@@ -37,7 +37,7 @@ fi
     # Clear previous build
     rm -rf build/
 
-    yarn
+    npm install
 
     # Start frontend project
     echo "EXCLUIR A API FRONTEND DO PM2"
@@ -45,12 +45,12 @@ fi
 
     echo "GERAR UM NOVO BUILD FRONTEND"
     # Buil frontend project   
-    yarn run build
+    npm run build
 
     cd server/
 
     echo "INSTALAR AS DEPENDENCIA FRONTEND"
-    yarn install
+    npm install
 
     echo "STARTING FRONTEND PM2"
 
