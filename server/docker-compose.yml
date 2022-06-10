@@ -1,0 +1,20 @@
+version: '2.2'
+services: 
+
+  api-client:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    image:  pdv-client
+    container_name:  pdv-client
+    command: bash -c "npm i && npm start"
+    user: root
+    environment:
+      - TZ=America/Manaus
+      - NODE_ENV=development
+    working_dir: /app
+    restart: unless-stopped
+    ports: 
+      - 3000:3000
+    volumes: 
+      - ./:/app

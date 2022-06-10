@@ -26,6 +26,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(helmet());
   // console.log = function () { }
 }
+//docker run --name mysql-container -d -v /var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=test -e MYSQL_USER=1234 -e MYSQL_PASSWORD=1234 mysql:5.7s
 // app.use(`${contextPath}/swagger`, swaggerUi.serve, swaggerUi.setup(documentSwagger));
 
 const port = process.env.BACK_PORT;
@@ -33,7 +34,7 @@ const server = `http://${process.env.BACKEND_HOST}:${port}${contextPath}`;
 
 if (cluster.isMaster) {
   console.log('Master process is running');
-  const createDB = require('../create_data_base');
+  //const createDB = require('../create_data_base');
   
 
   // Fork workers

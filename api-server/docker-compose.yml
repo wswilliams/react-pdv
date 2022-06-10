@@ -1,9 +1,9 @@
-version: '2.2'
+version: '3.3'
 services: 
 
   api-service:
     build:
-      dockerfile: ./Dockerfile
+      dockerfile: ./api-server/Dockerfile
       context: ${BACKEND_PATH}
     image:  pdv
     container_name: ${API_NAME}
@@ -11,10 +11,27 @@ services:
     user: root
     environment:
       - TZ=$TZ
-      - NODE_ENV=development
+      - NODE_ENV=${NODE_ENV}
     working_dir: /app
     restart: unless-stopped
+    depends_on: 
+      - mysql
     ports: 
-      - 3355:3355
+      - ${BACK_PORT}:3355
     volumes: 
       - ${BACKEND_PATH}:/app
+
+  mysql:
+      image: mysql:latest
+      restart: always
+      container_name: mysqldb
+      environment:
+        MYSQL_ROOT_PASSWORD: '123456'
+        MYSQL_ROOT_HOST: '%'
+        MYSQL_DATABASE: 'test'
+      volumes:
+        - ./db-data:/var/lib/mysql
+        - ./entrypoint:/docker-entrypoint-initdb.d/
+      ports:
+        - "3306:3306"
+      command: mysqld --init-file="/docker-entrypoint-initdb.d/create_data_base.sql"
