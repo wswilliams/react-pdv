@@ -1,0 +1,68 @@
+version: '3.8'
+services:
+
+  app-client:
+    build: 
+     dockerfile: ./server/Dockerfile
+     context: ./
+    image:  pdv/front
+    container_name: front-client
+    ports:
+      - 3000:80
+    volumes:
+      - ./:/app/
+    stdin_open: true
+    tty: true
+    depends_on:
+      - api-service
+    restart: unless-stopped
+    networks:
+      - netApi
+
+  api-service:
+    build:
+      dockerfile: ./api-server/Dockerfile
+      context: ./
+    image:  pdv/backend
+    container_name: api-server
+    command: bash -c "npm i && npm start"
+    user: root
+    environment:
+      TZ: $TZ
+    working_dir: /app
+    restart: unless-stopped
+    depends_on: 
+      - mysqldb
+    ports: 
+      - 3355:3355
+    volumes: 
+      - ./api-server:/app
+    networks:
+      - netApi
+
+  mysqldb:
+    image: mysql:8.0
+    container_name: mysqldb
+    restart: always
+    environment:
+       MYSQL_DATABASE: pdv
+       MYSQL_ROOT_PASSWORD: 123456
+       MYSQL_USER: pdv
+       MYSQL_PASSWORD: pdv
+       MYSQL_ROOT_HOST: '%'
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./api-server/create_data_base.sql:/docker-entrypoint-initdb.d/create_data_base.sql
+    command: mysqld --init-file="/docker-entrypoint-initdb.d/create_data_base.sql"
+    networks:
+      - netApi
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  netApi:
+    driver: bridge

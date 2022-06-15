@@ -49,13 +49,22 @@ if (cluster.isMaster) {
   });
 } else {
 
+  const envirorment = process.env.NODE_ENV;
+  const dbname = process.env.MYSQL_DATABASE;
+  const host = process.env.BACKEND_HOST; 
+  const mysq_host = process.env.MYSQL_DATABASE_HOST;
+
       app.listen(port, () => {
         console.log();
         console.log();
         console.log();
-        console.log('                     🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀');
+        console.log('                     🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀');
+        console.log(`                     🚀 Server started on host: ${host} 🚀 `);
         console.log(`                     🚀 Server started on port: ${port} 🚀 `);
-        console.log('                     🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀');
+        console.log(`                     🚀 Server started on env: ${envirorment} 🚀 `);
+        console.log(`                     🚀 Server started on database: ${dbname} 🚀 `);
+        console.log(`                     🚀 Server started on mysql: ${mysq_host} 🚀 `);
+        console.log('                     🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀');
         console.log();
         console.log();
 

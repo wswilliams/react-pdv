@@ -1,8 +1,8 @@
-FROM node
+FROM node:14-slim
 
 WORKDIR /usr/app
-COPY package*.json  /usr/app/
-RUN npm install 
+COPY ./api-server/package*.json  /usr/app/
+RUN npm install  && npm install --loglevel=error
 COPY . .
 EXPOSE 3355
 
