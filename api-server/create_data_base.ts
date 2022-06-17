@@ -30,7 +30,7 @@ connection.query(
     CONSTRAINT produtos_PK PRIMARY KEY (id)
   )
   ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4;`,
+  DEFAULT CHARSET=utf8;`,
   function (err: any, results: any) {
     console.log(results);
     console.log(err);
@@ -48,7 +48,7 @@ connection.query(
     CONSTRAINT compras_PK PRIMARY KEY (id)
   )
   ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4;`,
+  DEFAULT CHARSET=utf8;`,
   function (err: any, results: any) {
     console.log(results);
     console.log(err);
@@ -66,7 +66,7 @@ connection.query(
     CONSTRAINT compra_produtos_PK PRIMARY KEY (id)
   )
   ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4;`,
+  DEFAULT CHARSET=utf8;`,
   function (err: any, results: any) {
     console.log(results);
     console.log(err);

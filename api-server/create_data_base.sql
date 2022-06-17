@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   `data_criacao` datetime NOT NULL,
   `data_atualizacao` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- test.compras definition
 
@@ -26,7 +26,7 @@ CREATE TABLE  IF NOT EXISTS `compras` (
   `tipo_pagamento` varchar(100) NOT NULL,
   `status` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- test.compra_produtos definition
 
@@ -37,4 +37,4 @@ CREATE TABLE  IF NOT EXISTS  `compra_produtos` (
   `quantidade` int(11) NOT NULL,
   `preco` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

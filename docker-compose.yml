@@ -27,8 +27,11 @@ services:
     container_name: api-server
     command: bash -c "npm i && npm start"
     user: root
+    env_file:
+      - ./api-server/.env
     environment:
       TZ: $TZ
+      NODE_ENV: development
     working_dir: /app
     restart: unless-stopped
     depends_on: 
@@ -41,9 +44,9 @@ services:
       - netApi
 
   mysqldb:
-    image: mysql:8.0
+    image: mysql:5.7
     container_name: mysqldb
-    restart: always
+    restart: unless-stopped
     environment:
        MYSQL_DATABASE: pdv
        MYSQL_ROOT_PASSWORD: 123456
@@ -51,7 +54,7 @@ services:
        MYSQL_PASSWORD: pdv
        MYSQL_ROOT_HOST: '%'
     ports:
-      - 3306:3306
+      - 3307:3306
     volumes:
       - ./db:/var/lib/mysql
       - ./api-server/create_data_base.sql:/docker-entrypoint-initdb.d/create_data_base.sql
