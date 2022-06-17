@@ -13,6 +13,7 @@
 
 # production
 .db
+/db
 
 # misc
 .DS_Store
