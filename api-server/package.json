@@ -36,6 +36,7 @@
     "nodemailer": "^6.4.17",
     "npm": "^7.6.3",
     "pdfmake": "^0.1.71",
+    "pg": "^8.7.3",
     "swagger-jsdoc": "^6.0.1",
     "swagger-ui-express": "^4.1.6",
     "tsscmp": "^1.0.6",

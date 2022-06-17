@@ -7,7 +7,11 @@ import {
 } from 'react-icons/fi';
 
 import * as s from './styled';
-import Layout from '../../components/Layout';
+import * as ss from '../../components/Layout/styled';
+import MenuBar from '../../components/MenuBar';
+
+import GlobalStyles from '../../styles/global';
+import Sidebar from '../../components/Sidebar';
 
 import api from '../../service/api';
 import { formatPrice } from '../../utils/formatPrice';
@@ -118,83 +122,93 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <Layout>
-      <s.Header>
-        <s.Title>Painel</s.Title>
-        <s.Info>
-          <span className="cashier">
-            CAIXA ABERTO
-          </span>
-          <span className="date">
-          {data_hoje}
-          </span>
-        </s.Info>
-      </s.Header>
-      <s.CardContainer>
-        <s.Card>
-          <header>
-            <p>Quantidade de venda no mês</p>
-            <FiDollarSign size="24px" color="green" />
-          </header>
-          <section>
-            <p>R$</p>
-            <h1>
-              {countVendas}
-            </h1>
-          </section>
-        </s.Card>
-        <s.Card>
-          <header>
-            <p>Produtos Cadastrado</p>
-            <FiCreditCard size="24px" color="orange" />
-          </header>
-          <section>
-            <p>R$</p>
-            <h1>{countProdutos}</h1>
-          </section>
-        </s.Card>
-        <s.Card>
-          <header>
-            <p>Caixa mês atual</p>
-            <FiHardDrive size="24px" color="grey" />
-          </header>
-          <section>
-            <p>R$</p>
-            <h1>{totalCaixa}</h1>
-          </section>
-        </s.Card>
-      </s.CardContainer>
-      <s.Search>
-        <FiSearch size="24px" color="grey" />
-        <s.SearchInput placeholder="Consultar Material" onChange={handleChange}/>
-      </s.Search>
-  
-      <ProductList>
-        {products.map((product) => (
-          <li key={product.id}>
-            
-            <img src={bebidas} alt={product.nome} />
-            <span>
-             <strong>{product.nome}</strong>              
-              <p>{product.priceFormatted}</p>
-              <strong>{product.descricao} /QTD: {product.quantidade}</strong>
+    <ss.LayoutWrapper>
+    <GlobalStyles />
+    <MenuBar />
+    <ss.LayoutMain>
+    <s.Header>
+          <s.Title>Painel</s.Title>
+          <s.Info>
+            <span className="cashier">
+              CAIXA ABERTO
             </span>
-            <span>
-            <button id="add" type="button" onClick={() => handleAddProduct(product)}>
-              <FiPlusCircle size="24px" color="grey" />
-            </button>
-            <button id="delete" type="button" onClick={() => handleReduceProduct(product)}>
-              <FiMinusCircle size="24px" color="grey" />
-            </button>
-            <button id="delete" type="button" onClick={() => handleRemoveProduct(product)}>
-              <FiTrash2 size="24px" color="grey" />
-            </button>
+            <span className="date">
+            {data_hoje}
             </span>
+          </s.Info>
+        </s.Header>
+        <s.CardContainer>
+          <s.Card>
+            <header>
+              <p>Quantidade de venda no mês</p>
+              <FiDollarSign size="24px" color="green" />
+            </header>
+            <section>
+              <p>R$</p>
+              <h1>
+                {countVendas}
+              </h1>
+            </section>
+          </s.Card>
+          <s.Card>
+            <header>
+              <p>Produtos Cadastrado</p>
+              <FiCreditCard size="24px" color="orange" />
+            </header>
+            <section>
+              <p>R$</p>
+              <h1>{countProdutos}</h1>
+            </section>
+          </s.Card>
+          <s.Card>
+            <header>
+              <p>Caixa mês atual</p>
+              <FiHardDrive size="24px" color="grey" />
+            </header>
+            <section>
+              <p>R$</p>
+              <h1>{totalCaixa}</h1>
+            </section>
+          </s.Card>
+        </s.CardContainer>
+        <s.Search>
+          <FiSearch size="24px" color="grey" />
+          <s.SearchInput placeholder="Consultar Material" onChange={handleChange}/>
+        </s.Search>
+    
+        <ProductList>
+          {products.map((product) => (
+            <li key={product.id}>
+              
+              <img src={bebidas} alt={product.nome} />
+              <span>
+              <strong>{product.nome}</strong>              
+                <p>{product.priceFormatted}</p>
+                <strong>{product.descricao} /QTD: {product.quantidade}</strong>
+              </span>
+              <span>
+              <button id="add" type="button" onClick={() => handleAddProduct(product)}>
+                <FiPlusCircle size="24px" color="grey" />
+              </button>
+              <button id="delete" type="button" onClick={() => handleReduceProduct(product)}>
+                <FiMinusCircle size="24px" color="grey" />
+              </button>
+              <button id="delete" type="button" onClick={() => handleRemoveProduct(product)}>
+                <FiTrash2 size="24px" color="grey" />
+              </button>
+              </span>
 
-          </li>
-        ))}
-      </ProductList>
-    </Layout>
+            </li>
+          ))}
+        </ProductList>
+    </ss.LayoutMain>
+    <Sidebar />
+  </ss.LayoutWrapper>
+
+   //     <Layout>
+        
+        
+   //   </Layout>
   );
 };
 

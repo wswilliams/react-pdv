@@ -133,6 +133,11 @@ export const CategoryContainer = styled.div`
   overflow: hidden;
 `;
 
+export const flexContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 export const CategoryItem = styled.div`
 
 background: #ffffff;

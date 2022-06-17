@@ -44,7 +44,7 @@ services:
       - netApi
 
   mysqldb:
-    image: mysql:5.7
+    image: mysql:latest
     container_name: mysqldb
     restart: unless-stopped
     environment:
@@ -54,7 +54,7 @@ services:
        MYSQL_PASSWORD: pdv
        MYSQL_ROOT_HOST: '%'
     ports:
-      - 3307:3306
+      - 3306:3306
     volumes:
       - ./db:/var/lib/mysql
       - ./api-server/create_data_base.sql:/docker-entrypoint-initdb.d/create_data_base.sql

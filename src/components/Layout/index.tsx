@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Sidebar from '../Sidebar';
+//import Sidebar from '../Sidebar';
 import MenuBar from '../MenuBar';
 
 import * as s from './styled';
@@ -12,7 +12,6 @@ const Layout: React.FC = ({ children }) => (
     <GlobalStyles />
     <MenuBar />
     <s.LayoutMain>{children}</s.LayoutMain>
-    <Sidebar />
   </s.LayoutWrapper>
 );
 
