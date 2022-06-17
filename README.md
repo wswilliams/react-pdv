@@ -8,7 +8,7 @@
 
 [docker e docker-compose](https://docs.docker.com/engine/install/ubuntu/)
 
-[mysql-8](https://dev.mysql.com/downloads/installer/)
+[mysql-5.7](https://dev.mysql.com/downloads/installer/)
 
 
 ## Ambiente de desenvolvimento 
@@ -21,9 +21,17 @@ Clone repository - react-pdv (branch: main)
 
 ## Executar aplicação react-pdv: Frontend, Backend e MySQL
 
-### Executar by docker-compose
+#### Executar by docker-compose
 
-```
-$ cd react-pdv
+    $ cd react-pdv
 
-$ docker-compose up -d --build
+    $ docker-compose up -d --build
+
+
+#### Vericar log > docker logs
+
+    $ docker-compose up -d
+
+    ou 
+
+    $ docker logs -f --tail 1000 container_name
