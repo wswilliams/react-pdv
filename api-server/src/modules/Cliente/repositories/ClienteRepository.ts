@@ -1,4 +1,4 @@
-import knex from "../../../shared/database/connection";
+import knex from "../../../shared/database/connectionpg";
 import ICliente from "../entities/ICliente";
 import IRequestCliente from "../requestValidateInteface/IRequestCliente";
 import { IResponseCRUD }  from "../../../shared/interfaces/IResponseCRUD";
@@ -8,28 +8,28 @@ class ClienteRepository {
         id
       }: IRequestCliente): Promise<ICliente> {
         const dataCliente = await knex.raw(`SELECT * FROM clientes WHERE id = ${id}`);
-        return dataCliente[0];
+        return dataCliente.rows;
       }
 
     public async getTerm({
         term
       }: IRequestCliente): Promise<ICliente> {
         const dataCliente = await knex.raw(`SELECT * FROM clientes WHERE code LIKE '%${term}%'`);
-        return dataCliente[0];
+        return dataCliente.rows;
       }
     
     public async get({
         page, itemsPerPage
       }: IRequestCliente): Promise<ICliente> {
         const dataCliente = await knex.raw('SELECT * FROM clientes');
-        return dataCliente[0];
+        return dataCliente.rows;
       }
 
     public async delete(
       id: Number
       ): Promise<ICliente> {
         const dataCliente = await knex.raw(`DELETE clientes WHERE id = ${id}`);
-        return dataCliente[0];
+        return dataCliente.rows;
       }
 
     public async post(

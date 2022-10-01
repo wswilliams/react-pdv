@@ -5,6 +5,7 @@ import Dashboard from '../pages/Dashboard';
 import Product from '../pages/Product';
 import About from '../pages/About';
 import Report from '../pages/Report';
+import Simulator from '../pages/Simulator';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -12,6 +13,7 @@ const Routes: React.FC = () => (
     <Route path="/product" component={Product} />
     <Route path="/about" component={About} />
     <Route path="/report" component={Report} />
+    <Route path="/about" component={About} />
 
   </Switch>
 );

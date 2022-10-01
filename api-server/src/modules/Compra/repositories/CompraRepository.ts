@@ -1,4 +1,4 @@
-import knex from "../../../shared/database/connection";
+import knex from "../../../shared/database/connectionpg";
 import ICompra from "../entities/ICompra";
 import IRequestCompra from "../requestValidateInteface/IRequestCompra";
 import { IResponseCRUD }  from "../../../shared/interfaces/IResponseCRUD";
@@ -11,27 +11,27 @@ class CompraRepository {
 
         const dataCompra = await knex.raw(`SELECT * FROM compras WHERE id = ${id}`);
 
-      return dataCompra[0]
+      return dataCompra.rows
       }
        
      public async findProdutosCompra(id: Number): Promise<Array<IProduto>> {
 
         const dataCompraProduto = await knex.raw(`SELECT * FROM compra_produtos WHERE id_compra = ${id}`);
-        return dataCompraProduto[0];
+        return dataCompraProduto.rows;
       }
 
     public async findProdutos(data: any): Promise<Array<IProduto>> {
 
-     
+      console.log("findProdutos",data)
       const result = JSON.parse(JSON.stringify(data));
-    
+      console.log("result",result)
         let list = [];
      
         for (let value of result) {
          
           const result_produtos = await knex.raw(`SELECT * FROM produtos WHERE id = ${value.id_produto}`);
           
-         list.push(result_produtos[0]); 
+         list.push(result_produtos.rows); 
 
         }
         return list;
@@ -41,38 +41,40 @@ class CompraRepository {
         term
       }: IRequestCompra): Promise<ICompra> {
         const dataCompra = await knex.raw(`SELECT * FROM compras WHERE tipo_pagamento LIKE '%${term}%'`);
-        return dataCompra[0];
+        return dataCompra.rows;
       }
     
     public async get({
         page, itemsPerPage
       }: IRequestCompra): Promise<ICompra> {
         const dataCompra = await knex.raw(`SELECT * FROM compras`);
-        return dataCompra[0];
+        return dataCompra.rows;
       }
 
       public async getSum(): Promise<ICompra> {
         const dataCompra = await knex.raw(`SELECT SUM(total) as total FROM compras 
-        where data_criacao >= DATE_SUB( DATE( NOW() ), INTERVAL DAY( NOW() ) -1 DAY )`);
-        return dataCompra[0];
+        where data_criacao >= ( NOW() - INTERVAL '1 DAY')`);
+        return dataCompra.rows;
       }
 
       public async getCount(): Promise<ICompra> {
         const dataCompra = await knex.raw(`SELECT count(id) as total FROM compras 
-        where data_criacao >= DATE_SUB( DATE( NOW() ), INTERVAL DAY( NOW() ) -1 DAY )`);
-        return dataCompra[0];
+        where data_criacao >= ( NOW() - INTERVAL '1 DAY')`);
+        return dataCompra.rows;
       }
 
       public async getRelatorioMesCompras(query: any): Promise<Array<any>> {
 
         const compras = await knex.raw(`SELECT * FROM compras where data_criacao BETWEEN '${query.startDate} 01:01:00' AND '${query.endDate} 23:59:59'`);
-        const listCompras = JSON.parse(JSON.stringify(compras[0]));
+        const listCompras = JSON.parse(JSON.stringify(compras.rows));
  
         let list = [];
         for (let value of listCompras) {
-          
+          console.log("value.id",value.id)
           const dataCompraProduto = await this.findProdutosCompra(value.id);
+          console.log("dataCompraProduto",dataCompraProduto)
           const produto = await this.findProdutos(dataCompraProduto);
+          console.log("produto",produto)
           let item = {
             compra: value,
             produtos: produto
@@ -86,7 +88,7 @@ class CompraRepository {
       id: Number
       ): Promise<ICompra> {
         const dataCompra = await knex.raw(`DELETE FROM compras WHERE id = id`);
-        return dataCompra[0];
+        return dataCompra.rows;
       }
 
     public async post(
@@ -103,6 +105,10 @@ class CompraRepository {
            
             const resultCompra: any = await trx('compras').insert(data);
             
+            const sequenci = await knex.raw(`
+            SELECT "last_value" as id FROM public.compras_id_seq
+          `);
+          
             if (!resultCompra) {
                 trx.rollback();
                 throw new Error("Error na inserção do Compra!");
@@ -110,7 +116,7 @@ class CompraRepository {
             //produtos_compras
             for (let value of produtos) {
                 let data_value = {
-                  id_compra: resultCompra[0],
+                  id_compra: sequenci.rows[0].id,
                   id_produto: value.id,
                   quantidade: value.amount,
                   preco: value.preco
@@ -131,21 +137,13 @@ class CompraRepository {
 
                 const resultProduto: any = await trx('produtos')
                 .update({quantidade: diminuiDoStock})
-                .where("Id", value.id);
+                .where("id", value.id);
 
                 if (!resultProduto) {
                     trx.rollback();
-                    throw new Error("Error na alterar do Produto!");
+                    throw new Error("Error na alteração do Produto!");
                 }
 
-            }
-            const updateProduto: any = await trx('compras')
-            .update({total: valueTotal})
-            .where("Id", resultCompra[0]);
-
-            if (!updateProduto) {
-                trx.rollback();
-                throw new Error("Error na alterar do Produto!");
             }
 
              trx.commit();
@@ -153,6 +151,7 @@ class CompraRepository {
 
         } catch (error) {
             trx.rollback();
+            console.log(error)
             return {
                 success: false,
                 message: 'Não foi possível inserir o Compra',

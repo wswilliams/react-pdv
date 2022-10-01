@@ -46,7 +46,7 @@ export interface Compra {
 
 const Dashboard: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [totalCaixa, setTotalCaixa] = useState<Number>(0);
+  const [totalCaixa, setTotalCaixa] = useState<number>(0);
   const [countVendas, setCountVendas]= useState<Number>(0);
   const [countProdutos, setCountProdutos]= useState<Number>(0);
   const timeElapsed = Date.now();
@@ -167,7 +167,7 @@ const Dashboard: React.FC = () => {
             </header>
             <section>
               <p>R$</p>
-              <h1>{totalCaixa}</h1>
+              <h1>{formatPrice(totalCaixa)}</h1>
             </section>
           </s.Card>
         </s.CardContainer>

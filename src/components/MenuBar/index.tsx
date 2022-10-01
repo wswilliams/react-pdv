@@ -37,6 +37,11 @@ const MenuBar: React.FC = () => (
           <FiInfo size="1.6em" />
         </s.MenuBarItem>
       </s.MenuBarLink>
+      <s.MenuBarLink to="/simulator" title="Simulador">
+        <s.MenuBarItem>
+          <FiInfo size="1.6em" />
+        </s.MenuBarItem>
+      </s.MenuBarLink>
     </s.MenuBarGroup>
   </s.MenuBarWrapper>
 );

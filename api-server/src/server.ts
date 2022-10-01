@@ -13,7 +13,10 @@ const http = require('http');
 const app = express();
 const contextPath = '/api/generec';
 
-app.use(express.json());
+//app.use(express.json());
+app.use(express.json({limit: '500mb'}));
+app.use(express.urlencoded({limit: '500mb'}));
+
 app.use(cors())
 app.use(contextPath, routes);
 
@@ -34,7 +37,7 @@ const server = `http://${process.env.BACKEND_HOST}:${port}${contextPath}`;
 
 if (cluster.isMaster) {
   console.log('Master process is running');
-  //const createDB = require('../create_data_base');
+  const createDB = require('../create_data_base_postgres');
   
 
   // Fork workers

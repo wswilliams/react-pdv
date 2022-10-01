@@ -1,4 +1,4 @@
-import knex from "../../../shared/database/connection";
+import knex from "../../../shared/database/connectionpg";
 import IProduto from "../entities/IProduto";
 import IRequestProduto from "../requestValidateInteface/IRequestProduto";
 import { IResponseCRUD }  from "../../../shared/interfaces/IResponseCRUD";
@@ -8,32 +8,33 @@ class ProdutoRepository {
         id
       }: IRequestProduto): Promise<IProduto> {
         const dataProduto = await knex.raw(`SELECT * FROM produtos WHERE id = ${id}`);
-        return dataProduto[0];
+        return dataProduto.rows;
       }
 
     public async getTerm({
         term
       }: IRequestProduto): Promise<IProduto> {
         const dataProduto = await knex.raw(`SELECT * FROM produtos WHERE nome LIKE '%${term}%'`);
-        return dataProduto[0];
+        return dataProduto.rows;
       }
     
     public async get({
         page, itemsPerPage
       }: IRequestProduto): Promise<IProduto> {
         const dataProduto = await knex.raw(`SELECT * FROM produtos`);
-        return dataProduto[0];
+        console.log("dataProduto",dataProduto.rows)
+        return dataProduto.rows;
       }
 
       public async getCount(): Promise<IProduto> {
         const dataProduto = await knex.raw(`SELECT count(id) as total FROM produtos`);
-        return dataProduto[0];
+        return dataProduto.rows;
       }
     public async delete(
       id: Number
       ): Promise<IProduto> {
         const dataProduto = await knex.raw(`DELETE from Produtos WHERE id = ${id}`);
-        return dataProduto[0];
+        return dataProduto.rows;
       }
 
     public async post(
@@ -77,7 +78,7 @@ class ProdutoRepository {
 
             const resultProduto: any = await trx('produtos')
             .update(data)
-            .where("Id", data.id);
+            .where("id", data.id);
 
             if (!resultProduto) {
                 trx.rollback();
