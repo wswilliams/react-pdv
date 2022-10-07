@@ -8,7 +8,7 @@ services:
     image:  pdv/front
     container_name: front-client
     ports:
-      - 3000:80
+      - 3001:80
     volumes:
       - ./:/app/
     stdin_open: true
@@ -34,16 +34,33 @@ services:
       NODE_ENV: development
     working_dir: /app
     restart: unless-stopped
- #   depends_on: 
- #     - mysqldb
+    depends_on: 
+      - postgres
     ports: 
       - 3355:3355
     volumes: 
       - ./api-server:/app
     networks:
       - netApi
-
- # mysqldb:
+   
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+      #- ./db:/var/lib/postgres
+      #- ./api-server/create_data_base_postgres.sql:/docker-entrypoint-initdb.d/create_data_base_postgres.sql
+     #command: mysqld --init-file="/docker-entrypoint-initdb.d/create_data_base_postgres.sql"
+    ports:
+      - "5432:5432"
+    networks:
+      - netApi
+  #mysqldb:
  #   image: mysql:5.7
  #   container_name: mysqldb
  #   restart: unless-stopped
