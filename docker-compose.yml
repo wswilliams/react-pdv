@@ -35,7 +35,7 @@ services:
     working_dir: /app
     restart: unless-stopped
     depends_on: 
-      - postgres
+      - postgres_dev
     ports: 
       - 3355:3355
     volumes: 
@@ -43,19 +43,18 @@ services:
     networks:
       - netApi
    
-  postgres:
+  postgres_dev:
     container_name: postgres_container
     image: postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      PGDATA: /data/postgres
+       POSTGRES_USER: postgres
+       POSTGRES_PASSWORD: postgres
+       POSTGRES_DB: postgres
+       DATABASE_PORT: 5432
+       POSTGRES_HOST: 'localhost'
     volumes:
-      - postgres:/data/postgres
-      #- ./db:/var/lib/postgres
-      #- ./api-server/create_data_base_postgres.sql:/docker-entrypoint-initdb.d/create_data_base_postgres.sql
-     #command: mysqld --init-file="/docker-entrypoint-initdb.d/create_data_base_postgres.sql"
+      - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
@@ -80,8 +79,7 @@ services:
  #     - netApi
 
 volumes:
-  postgres:
-    driver: local
+  postgres_data:
 
 networks:
   netApi:
