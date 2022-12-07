@@ -37,7 +37,7 @@ const server = `http://${process.env.BACKEND_HOST}:${port}${contextPath}`;
 
 if (cluster.isMaster) {
   console.log('Master process is running');
-  //const createDB = require('../create_data_base_postgres');
+  const createDB = require('../create_data_base_postgres');
   
 
   // Fork workers
